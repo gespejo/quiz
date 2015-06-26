@@ -18,7 +18,6 @@
     "debug": "~2.0.0",
     "ejs": "~0.8.5",
     "express-partials": "~0.3.0",
-    "sequelize": "~1.7.0",
-    "sqlite3": "~3.0.8"
+    "sequelize": "~1.7.0"
   }
 }
