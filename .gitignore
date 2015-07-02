@@ -28,3 +28,7 @@ node_modules
 
 #BD
 quiz.sqlite
+
+# variable de entorno development sqlite
+.env
+
