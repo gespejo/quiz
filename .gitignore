@@ -32,3 +32,5 @@ quiz.sqlite
 # variable de entorno development sqlite
 .env
 
+#GEG
+*.bat
