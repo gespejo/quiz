@@ -22,7 +22,7 @@ exports.index = function(req, res) {
     }
     ).then(
     function(quizes) {
-      res.render('quizes/index.ejs', { quizes: quizes, textoFiltroEjs: filtro});
+      res.render('quizes/index', { quizes: quizes, textoFiltroEjs: filtro});
     }
   ).catch(function(error) {next(error);});
 };
@@ -40,3 +40,23 @@ exports.answer = function(req, res) {
   }
   res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado});
 };
+
+// GET /quizes/new
+exports.new = function(req, res) {
+  var quiz = models.Quiz.build(
+    {pregunta: "Pregunta", respuesta: "Respuesta"}
+  );
+
+  res.render('quizes/new', {quiz: quiz});
+};
+
+// POST /quizes/create
+exports.create = function(req, res) {
+  var quiz = models.Quiz.build( req.body.quiz );
+
+// guarda en DB los campos pregunta y respuesta de quiz
+  quiz.save({fields: ["pregunta", "respuesta"]}).then(function(){
+    res.redirect('/quizes');  
+  })   // res.redirect: Redirección HTTP a lista de preguntas
+};
+
