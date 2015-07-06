@@ -14,9 +14,15 @@ exports.load = function(req, res, next, quizId) {
 
 // GET /quizes
 exports.index = function(req, res) {
-  models.Quiz.findAll().then(
+  var condicion = ("%" + (req.query.search || "") + "%").replace(' ', '%');
+  var filtro = 'Filtro: ' + (req.query.search || 'ninguno');
+  models.Quiz.findAll(
+    {where: ["pregunta like ?", condicion],
+     order: ['pregunta']
+    }
+    ).then(
     function(quizes) {
-      res.render('quizes/index.ejs', { quizes: quizes});
+      res.render('quizes/index.ejs', { quizes: quizes, textoFiltroEjs: filtro});
     }
   ).catch(function(error) {next(error);});
 };
