@@ -18,10 +18,9 @@ router.get('/quizes/new',                  quizController.new);
 router.post('/quizes/create',              quizController.create);
 router.get('/quizes/:quizId(\\d+)/edit',   quizController.edit);
 router.put('/quizes/:quizId(\\d+)',        quizController.update);
+router.delete('/quizes/:quizId(\\d+)',     quizController.destroy);
 
-router.get('/quizes/search', function(req, res) {
-  res.render('quizes/search', { title: 'Quiz', errors: []});
-});
+router.get('/quizes/search',               quizController.search);
 
 router.get('/author', function(req, res) {
   res.render('credits', { title: 'Quiz', errors: []});

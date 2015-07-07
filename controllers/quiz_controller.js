@@ -49,7 +49,7 @@ exports.answer = function(req, res) {
 
 // GET /quizes/new
 exports.new = function(req, res) {
-  var quiz = models.Quiz.build(
+  var quiz = models.Quiz.build( // crea objeto quiz 
     {pregunta: "Pregunta", respuesta: "Respuesta"}
   );
 
@@ -72,7 +72,7 @@ exports.create = function(req, res) {
         .then( function(){ res.redirect('/quizes')}) 
       }      // res.redirect: Redirección HTTP a lista de preguntas
     }
-  );
+  ).catch(function(error){next(error)});
 };
 
 // GET /quizes/:id/edit
@@ -99,5 +99,19 @@ exports.update = function(req, res) {
         .then( function(){ res.redirect('/quizes');});
       }     // Redirección HTTP a lista de preguntas (URL relativo)
     }
-  );
+  ).catch(function(error){next(error)});
 };
+
+// DELETE /quizes/:id
+exports.destroy = function(req, res) {
+  req.quiz.destroy().then( function() {
+    res.redirect('/quizes');
+  }).catch(function(error){next(error)});
+};
+
+// GET /quizes/search
+exports.search = function(req, res) {
+  res.render('quizes/search', { title: 'Quiz', errors: []});
+};
+
+
