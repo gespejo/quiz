@@ -5,7 +5,7 @@ var quizController = require('../controllers/quiz_controller');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Quiz' });
+  res.render('index', { title: 'Quiz', errors: []});
 });
 
 // Autoload de comandos con :quizId
@@ -18,12 +18,11 @@ router.get('/quizes/new', quizController.new);
 router.post('/quizes/create', quizController.create);
 
 router.get('/quizes/search', function(req, res) {
-  res.render('quizes/search', { title: 'Quiz' });
+  res.render('quizes/search', { title: 'Quiz', errors: []});
 });
 
 router.get('/author', function(req, res) {
-  res.render('credits', { title: 'Quiz' });
+  res.render('credits', { title: 'Quiz', errors: []});
 });
 
 module.exports = router;
-
