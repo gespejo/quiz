@@ -2,5 +2,24 @@
 <input type="text" id="preg" name="quiz[pregunta]" value="<%= quiz.pregunta %>"/> <p>
 <label for="resp" class="rem">Respuesta:</label>
 <input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>"/> <p>
+<label for="tema" class="rem">Índice temático:</label>
+<select name="quiz[tema]" id="SelCombo">
+  <option value="otro" selected>Otro</option>
+  <option value="humanidades">Humanidades</option>
+  <option value="ocio">Ocio</option>
+  <option value="ciencia">Ciencia</option>
+  <option value="tecnologia">Tecnología</option>
+</select><p>
+<script>
+var tempIndiceTematico = "<%= quiz.tema %>";
+var mySelect = document.getElementById("SelCombo");
+
+for(var i, j = 0; i = mySelect.options[j]; j++) {
+    if(i.value == tempIndiceTematico) {
+        mySelect.selectedIndex = j;
+        break;
+    }
+}
+</script>
 <a href="/quizes"><button type="button">Cancelar</button></a>
 <input type="submit" value="Salvar">
