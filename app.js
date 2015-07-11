@@ -37,6 +37,23 @@ app.use(function(req, res, next) {
     req.session.redir = req.path;
   }
 
+  // si hay sesion miramos la ultima solicitud http
+  if(req.session.user) {
+    var ahora = (new Date()).getTime();
+    req.session.lastAccess = (req.session.lastAccess || new Date().getTime());
+
+    if(ahora > req.session.lastAccess + 2 * 60 * 1000) {
+      delete req.session.user;
+      delete req.session.lastAccess;
+      req.session.mostrarMsgInactividad = true;
+    }
+    else {
+      // guardar hora en session.lastAccess para desconectar
+      req.session.lastAccess = new Date().getTime();
+    }
+  }
+  else if(req.session.mostrarMsgInactividad)
+    delete req.session.mostrarMsgInactividad;
   // Hacer visible req.session en las vistas
   res.locals.session = req.session;
   next();

@@ -12,6 +12,8 @@
         media='only screen and (max-width: 480px)' 
         href='/stylesheets/smartphone.css' />
 
+    <script type="text/javascript" src="/js/zepto.min.js" > </script>
+    <script type="text/javascript" src="/js/touch.js" > </script>
 </head> 
 
 <body>
@@ -21,6 +23,11 @@
       <span class="right"><a href="/login">Login</a></span>
     <%}else{%>
       <span class="right"> <%=session.user.username%> <a href="/logout">Logout</a></span>
+    <%}%>
+    <%if(session.mostrarMsgInactividad) {%>
+      <script>
+        alert('Se ha excedido el tiempo de inactividad');
+      </script>
     <%}%>
     
     <h2>Quiz<span>: el juego de las preguntas</span></h2>
