@@ -33,6 +33,21 @@ exports.index = function(req, res) {
   ).catch(function(error) {next(error);});
 };
 
+// GET /quizes
+exports.busquedas = function(req, res) {
+  var condicion = ("%" + (req.query.search || "") + "%").replace(' ', '%');
+  var filtro = 'Filtro: ' + (req.query.search || 'ninguno');
+  models.Quiz.findAll(
+    {where: ["pregunta like ?", condicion],
+     order: ['pregunta']
+    }
+    ).then(
+    function(quizes) {
+      res.render('quizes/_buscar.ejs', { layout: false, quizes: quizes, textoFiltroEjs: filtro, errors: []});
+    }
+  ).catch(function(error) {next(error);});
+};
+
 // GET /quizes/:id
 exports.show = function(req, res) {
   res.render('quizes/show', { quiz: req.quiz, errors: []});
@@ -121,4 +136,10 @@ exports.search = function(req, res) {
   res.render('quizes/search', { title: 'Quiz', errors: []});
 };
 
+exports.matchword = function(req, res) {
+      console.log(req.params.value);
+      res.writeHead(200, {'content-type': 'text/json' });
+      res.write( JSON.stringify({ test : 'test'}) );
+      res.end('\n');
+};
 

@@ -10,16 +10,17 @@
   <option value="ciencia">Ciencia</option>
   <option value="tecnologia">Tecnología</option>
 </select><p>
-<script>
-var tempIndiceTematico = "<%= quiz.tema %>";
-var mySelect = document.getElementById("SelCombo");
 
-for(var i, j = 0; i = mySelect.options[j]; j++) {
+<script>
+  var tempIndiceTematico = "<%= quiz.tema %>";
+  var mySelect = document.getElementById("SelCombo");
+
+  for(var i, j = 0; i = mySelect.options[j]; j++) {
     if(i.value == tempIndiceTematico) {
         mySelect.selectedIndex = j;
         break;
     }
-}
+  }
 </script>
 <a href="/quizes"><button type="button">Cancelar</button></a>
 <input type="submit" value="Salvar">

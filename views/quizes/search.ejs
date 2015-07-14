@@ -1,18 +1,24 @@
 <form method="get" action="/quizes">        
   Buscar: <p>
-  <input type="text" id="inputSearch" name="search" placeholder="Filtro de busqueda"/>
-  <div  id='marco'><div id="iframes" /></div>
-<text id="textSearch" placeHolder="kk"/>
-  <br><a href="/quizes">Volver</a> 
+  <label id="lbl"></label><br>
+  <input type="text" id="inputSearch" name="search" placeholder="Filtro de busqueda"/><br>
+  <iframe id="iframeBusq" frameborder=0 height=100 src="/quizes/busquedas"> </iframe><br>
+  <a href="/quizes">Volver</a> 
   <script>
-    //var dt = new DateTime();
     $(function() {
-    $("#inputSearch").focus();
-    //$("#marco").text(dt.formats.pretty.b);
-// make jQuery style call for DateTime traditional JS plugin
-if (!$.jqDateTime) $.extend({ jqDateTime: function() { return new DateTime(arguments); } });
-// use
-$("#marco").text($.jqDateTime().formats.pretty.a);  });
+      // poner el foco en la caja de texto
+      $("#inputSearch").focus();
+      // ajax con resultados
+      $('#inputSearch').bind('keyup', function() {
+        $('#lbl').html('Filtrando ... ' + $('#inputSearch').val());
+        $('#iframeBusq').attr("src", "/quizes/busquedas?search=" + $('#inputSearch').val());
+        $('#iframeBusq').show();
+        if($('#inputSearch').val() === '')
+          $('#lbl').html('');
+        else
+          $('#lbl').html('Filtro ajax: ' + $('#inputSearch').val());
+      });
+    });
   </script>
 </form>
 
