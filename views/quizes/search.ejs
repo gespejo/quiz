@@ -1,8 +1,7 @@
 <form method="get" action="/quizes">        
-  Buscar: <p>
-  <label id="lbl"></label><br>
+  Filtro : 
   <input type="text" id="inputSearch" name="search" placeholder="Filtro de busqueda"/><br>
-  <iframe id="iframeBusq" frameborder=0 height=100 src="/quizes/busquedas"> </iframe><br>
+  <iframe id="iframeBusq" frameborder=0 src="/quizes/busquedas"> </iframe><br>
   <a href="/quizes">Volver</a> 
   <script>
     $(function() {
@@ -10,13 +9,8 @@
       $("#inputSearch").focus();
       // ajax con resultados
       $('#inputSearch').bind('keyup', function() {
-        $('#lbl').html('Filtrando ... ' + $('#inputSearch').val());
         $('#iframeBusq').attr("src", "/quizes/busquedas?search=" + $('#inputSearch').val());
         $('#iframeBusq').show();
-        if($('#inputSearch').val() === '')
-          $('#lbl').html('');
-        else
-          $('#lbl').html('Filtro ajax: ' + $('#inputSearch').val());
       });
     });
   </script>

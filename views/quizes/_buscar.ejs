@@ -1,10 +1,18 @@
+<script type="text/javascript" src="/js/zepto.min.js" > </script>
+
+<label id="lbl"> Filtrando ...</label> <%=textoFiltroEjs%>
 <table>
-  <% var i; for (i=0; i < quizes.length; i++) { %>        
+  <% var i; for (i=0; i < quizes.length; i++) { %>
     <tr>
         <td>
-            <a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a>
+            <%= quizes[i].pregunta %>
         </td>
     </tr> 
   <% } %>
 </table>
+<script>
+  $(function() {
+    $('#lbl').text(' Filtro ... ');
+  });
+</script>
 

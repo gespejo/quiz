@@ -21,7 +21,7 @@ exports.load = function(req, res, next, quizId) {
 // GET /quizes
 exports.index = function(req, res) {
   var condicion = ("%" + (req.query.search || "") + "%").replace(' ', '%');
-  var filtro = 'Filtro: ' + (req.query.search || 'ninguno');
+  var filtro = (req.query.search || 'ninguno');
   models.Quiz.findAll(
     {where: ["pregunta like ?", condicion],
      order: ['pregunta']
@@ -36,14 +36,17 @@ exports.index = function(req, res) {
 // GET /quizes
 exports.busquedas = function(req, res) {
   var condicion = ("%" + (req.query.search || "") + "%").replace(' ', '%');
-  var filtro = 'Filtro: ' + (req.query.search || 'ninguno');
+  var filtro = (req.query.search || 'ninguno');
   models.Quiz.findAll(
     {where: ["pregunta like ?", condicion],
      order: ['pregunta']
     }
     ).then(
     function(quizes) {
-      res.render('quizes/_buscar.ejs', { layout: false, quizes: quizes, textoFiltroEjs: filtro, errors: []});
+      res.render('quizes/_buscar.ejs',
+                 { layout: false,
+                   quizes: quizes,
+                   textoFiltroEjs: filtro, errors: []});
     }
   ).catch(function(error) {next(error);});
 };
